@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+@model WinningAtWalmart.Models.Worker
+
+<div class="jumbotron">
+
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="InsertWorker">
+            <div asp-validation-summary="ModelOnly" class="text-danger">
+                <div class="form-group">
+                    <label asp-for="FirstName" class="control-label"></label><p>*</p>
+                    <input asp-for="FirstName" class="form-control" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LastName" class="control-label"></label><p>*</p>
+                    <input asp-for="LastName" class="form-control" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label><p>*</p>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password" class="control-label"></label><p>*</p>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <table class="table table-bordered table-responsive table-hover">
+        <tr>
+            <th> @Html.DisplayNameFor(model => model.FirstName)</th>
+            <th> @Html.DisplayNameFor(model => model.LastName)</th>
+            <th> @Html.DisplayNameFor(model => model.Email)</th>
+            <th> @Html.DisplayNameFor(model => model.Password)</th>
+        </tr>
+        @foreach (var item in Model.ShowAllWorkers)
+        {
+            <tr>
+                <td>@item.FirstName</td>
+                <td>@item.LastName</td>
+                <td>@item.Email</td>
+                <td>@item.Password</td>
+
+            </tr>
+        }
+    </table>
+
+</div>
+

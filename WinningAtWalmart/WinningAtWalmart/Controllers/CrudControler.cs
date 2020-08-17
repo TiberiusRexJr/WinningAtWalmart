@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WinningAtWalmart.Models;
+using WinningAtWalmart.DataLayer;
 
 namespace WinningAtWalmart.Controllers
 {
@@ -29,9 +33,14 @@ namespace WinningAtWalmart.Controllers
 
         // POST: CrudControler/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
+        /*[ValidateAntiForgeryToken]*/
+        public ActionResult Create(Worker worker)
+        { 
+            #region variables
+        
+
+        #endregion
+        
             try
             {
                 return RedirectToAction(nameof(Index));

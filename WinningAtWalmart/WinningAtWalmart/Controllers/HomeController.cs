@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using WinningAtWalmart.DataLayer;
 using WinningAtWalmart.Models;
 
 namespace WinningAtWalmart.Controllers
@@ -14,8 +15,9 @@ namespace WinningAtWalmart.Controllers
         public IActionResult Index()
         {
             Worker worker = new Worker();
-            worker.ShowAllWorkers=
-            return View();
+            DataBase db = new DataBase();
+            worker.ShowAllWorkers=db.RetrieveAll();
+            return View(worker);
         }
 
         public IActionResult About()

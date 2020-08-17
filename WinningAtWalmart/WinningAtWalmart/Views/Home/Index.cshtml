@@ -1,49 +1,22 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Winning At Walmart V1";
 }
 @model WinningAtWalmart.Models.Worker
 
-<div class="jumbotron">
-
-</div>
-
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="InsertWorker">
-            <div asp-validation-summary="ModelOnly" class="text-danger">
-                <div class="form-group">
-                    <label asp-for="FirstName" class="control-label"></label><p>*</p>
-                    <input asp-for="FirstName" class="form-control" />
-                    <span asp-validation-for="FirstName" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="LastName" class="control-label"></label><p>*</p>
-                    <input asp-for="LastName" class="form-control" />
-                    <span asp-validation-for="LastName" class="text-danger"></span>
-
-                </div>
-                <div class="form-group">
-                    <label asp-for="Email" class="control-label"></label><p>*</p>
-                    <input asp-for="Email" class="form-control" />
-                    <span asp-validation-for="Email" class="text-danger"></span>
-
-                </div>
-                <div class="form-group">
-                    <label asp-for="Password" class="control-label"></label><p>*</p>
-                    <input asp-for="Password" class="form-control" />
-                    <span asp-validation-for="Password" class="text-danger"></span>
-
-                </div>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+    <div class="col-md-8 col-lg-offset-4">
+        <h2>Sign Up!</h2>
+        <br />
+        <span>First Name:</span>@Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })<br />
+        <span>Last Name: </span>@Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })<br />
+        <span>Email:</span>@Html.TextBoxFor(m => m.Email, new { @class="form-control"})<br/>
+        <span>Password:</span>@Html.TextBoxFor(m => m.Password, new { @class = "form-control" })<br/>
+        <p><a class="btn btn-default" onclick='SaveUser()'>Save</a></p><br /><br/>
     </div>
 </div>
 
 <div class="row">
-    <table class="table table-bordered table-responsive table-hover">
+    <table @*class="table table-bordered table-responsive table-hover" *@ id="myTable" class="table-striped">
         <tr>
             <th> @Html.DisplayNameFor(model => model.FirstName)</th>
             <th> @Html.DisplayNameFor(model => model.LastName)</th>
@@ -63,4 +36,52 @@
     </table>
 
 </div>
+<style>
+    #myTable tr th {
+        color:white;
+        width:300px;
+        height:40px;
+        text-decoration:solid;
+        background-color:yellowgreen;
+        padding:10px;
+    }
+
+</style>
+<script>
+    var firstname = $("#FirstName").val;
+    var lastname = $("#LastName").val;
+    var email = $("#Email").val;
+    var password = $("#Password").val;
+    $.ajax
+        ({
+            type: "POST",
+            url: "Crud/Create",
+            data: JSON.stringify({ firstname: firstname }, { lastname: lastname },
+                { email: email }, { password: password }),
+            contentType: "application/json",
+            success:
+                function (result)
+                {
+                    $("#myTable").append
+                        (
+                            "<tr><td>"
+                            + result.firstname +
+                            "</td ><td> >"
+                            + result.lastname +
+                            "</td><td>"
+                            + result.email +
+                            "</td><td>"
+                            + result.password +
+                            "</td></tr>"
+
+                            $("#FirstName").val(" ");
+                    $("#LastName").val(" ");
+                    $("#Email").val(" ");
+                    $("#Password").val(" ");
+                }
+
+
+
+        })
+</script>
 

@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Data.SqlClient;
-using WinningAtWalmart.Models;
 using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using WinningAtWalmart.Models;
+
 
 namespace WinningAtWalmart.DataLayer
 {
@@ -99,19 +101,24 @@ namespace WinningAtWalmart.DataLayer
         public List<Worker> RetrieveAll()
         {
             #region Variables
-            SqlCommand cmd = new SqlCommand();
-            cmd.Connection = DbConnection;
-            cmd.CommandText = ProcedureCRUD;
+            SqlCommand cmd = new SqlCommand(ProcedureCRUD,DbConnection);
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             SqlDataAdapter dataAdapter = new SqlDataAdapter();
             DataSet dataSet = new DataSet();
             int queryCode = 4;
             string result = string.Empty;
             List<Worker> workers = new List<Worker>();
-           
+
             #endregion
             #region SetParameters
+            cmd.Parameters.AddWithValue("@id", null);
+            
+            cmd.Parameters.AddWithValue("@firstname",null);
+            cmd.Parameters.AddWithValue("@lastname",null);
+            cmd.Parameters.AddWithValue("@email",null);
+            cmd.Parameters.AddWithValue("@password",null);
             cmd.Parameters.AddWithValue("@query", queryCode);
+
             #endregion
             #region ExecuteTryCatchFinally
             try
@@ -122,16 +129,22 @@ namespace WinningAtWalmart.DataLayer
 
                 for (int i = 0; i < dataSet.Tables[0].Rows.Count; i++)
                 {
-                    Worker worker = new Worker();
-                    worker.Id = Convert.ToInt32(dataSet.Tables[0].Rows[i]["Id"]);
-                    worker.FirstName=dataSet.Tables[0].Rows[i]["FirstName"].ToString();
-                    worker.LastName = dataSet.Tables[0].Rows[i]["LastName"].ToString();
-                    worker.Email = dataSet.Tables[0].Rows[i]["Email"].ToString();
-                    worker.Password = dataSet.Tables[0].Rows[i]["psword"].ToString();
+                    Worker worker1 = new Worker();
+                    worker1.Id = Convert.ToInt32(dataSet.Tables[0].Rows[i]["Id"]);
+                    worker1.FirstName = dataSet.Tables[0].Rows[i]["FirstName"].ToString();
+                    worker1.LastName = dataSet.Tables[0].Rows[i]["LastName"].ToString();
+                    worker1.Email = dataSet.Tables[0].Rows[i]["Email"].ToString();
+                    worker1.Password = dataSet.Tables[0].Rows[i]["Psword"].ToString();
+                    /*          worker1.Id = 1;
+                              worker1.FirstName = "hayyp";
+                              worker1.LastName = "lastname";
+                              worker1.Email = "email.com";
+                              worker1.Password = "passwrd";*/
 
 
 
-                    workers.Add(worker); 
+
+                    workers.Add(worker1); 
 
                 }
 
@@ -139,7 +152,8 @@ namespace WinningAtWalmart.DataLayer
             }
             catch (Exception e)
             {
-                return result = e.Messag
+                ///*UPGADE: Add a "empty" worker class object?*/
+                return workers;
             }
             finally
             {
@@ -147,13 +161,42 @@ namespace WinningAtWalmart.DataLayer
             }
             #endregion
         }
-        public string RetrieveById(int id)
+        public Worker RetrieveById(int id)
         {
             #region Variables
+            Worker worker=new Worker();
             int queryCode = 5;
             string result = string.Empty;
             SqlCommand cmd = new SqlCommand(ProcedureCRUD, DbConnection);
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            DataSet dataSet = new DataSet();
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
+            sqlDataAdapter.SelectCommand = cmd;
+            #endregion
+            #region AddParameters
+            cmd.Parameters.AddWithValue("@Id",id);
+            cmd.Parameters.AddWithValue("@query", queryCode);
+            #endregion
+            #region ExecuteTryCatchFinally
+            try
+            {
+                DbConnection.Open();
+                sqlDataAdapter.Fill(dataSet);
+                for (int i = 0; i < dataSet.Tables[0].Rows.Count; i++)
+                {
+                    worker.Id = Convert.ToInt32(dataSet.Tables[0].Rows[i]["Id"]);
+                    worker.FirstName = dataSet.Tables[0].Rows[i]["FirstName"].ToString();
+                    worker.Email = dataSet.Tables[0].Rows[i]["Email"].ToString();
+                    worker.Password = dataSet.Tables[0].Rows[i]["Psword"].ToString();
+                }
+                return worker;
+
+            }
+            catch (Exception e)
+            {
+                worker.FirstName = e.Message;
+                return worker;
+            }
             #endregion
         }
         public string Update(Worker worker)

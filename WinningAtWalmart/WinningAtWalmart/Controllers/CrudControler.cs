@@ -16,6 +16,7 @@ namespace WinningAtWalmart.Controllers
         // GET: CrudControler
         public ActionResult Index()
         {
+            
             return View();
         }
 
@@ -26,15 +27,20 @@ namespace WinningAtWalmart.Controllers
         }
 
         // GET: CrudControler/Create
+        [HttpGet]
         public ActionResult Create()
         {
+           /* DataBase db = new DataBase();
+            string result=db.Create(worker);
+            ViewData["result"] = result;
+            ModelState.Clear();*/
             return View();
         }
 
         // POST: CrudControler/Create
         [HttpPost]
         /*[ValidateAntiForgeryToken]*/
-        public ActionResult Create(Worker worker)
+     /*   public ActionResult Create(Worker worker)
         { 
             #region variables
         
@@ -49,7 +55,8 @@ namespace WinningAtWalmart.Controllers
             {
                 return View();
             }
-        }
+            throw new NotImplementedException();
+        }*/
 
         // GET: CrudControler/Edit/5
         public ActionResult Edit(int id)

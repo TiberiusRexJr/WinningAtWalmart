@@ -1,0 +1,2 @@
+create table WinningAtWalmart_Orders
+([OrderId] int not null primary key identity(1,1),[ProductName] varchar(50),[Quantity] int,[Price] decimal(18,0),[Amount] decimal(18,0),[CustomerId] int foreign key references dbo.WinningAtWalmart_Workers(Id));

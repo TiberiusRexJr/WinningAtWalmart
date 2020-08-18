@@ -14,7 +14,7 @@ namespace WinningAtWalmart
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CrudApi : ControllerBase
+    public class Api : ControllerBase
     {
         // GET: api/<CrudApi>
         [HttpGet]
@@ -32,14 +32,13 @@ namespace WinningAtWalmart
 
         // POST api/<CrudApi>
         [HttpPost]
-        public void Post([FromBody] Worker worker)
+        public string Post([FromBody] Worker worker)
         {
             DataBase db = new DataBase();
             string status=db.Create(worker);
-            return JsonResult(worker);
+            string output = JsonConvert.SerializeObject(worker);
+            return output;
             /*return Json(worker, new Newtonsoft.Json.JsonSerializerSettings());*/
-            
-            
         }
 
         // PUT api/<CrudApi>/5

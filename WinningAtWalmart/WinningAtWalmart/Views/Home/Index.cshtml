@@ -9,9 +9,10 @@
         <br />
         <span>First Name:</span>@Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })<br />
         <span>Last Name: </span>@Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })<br />
-        <span>Email:</span>@Html.TextBoxFor(m => m.Email, new { @class="form-control"})<br/>
-        <span>Password:</span>@Html.TextBoxFor(m => m.Password, new { @class = "form-control" })<br/>
-        <p><a class="btn btn-default" onclick='SaveUser()'>Save</a></p><br /><br/>
+        <span>Email:</span>@Html.TextBoxFor(m => m.Email, new { @class = "form-control" })<br />
+        <span>Password:</span>@Html.TextBoxFor(m => m.Password, new { @class = "form-control" })<br />
+        <
+        <!--<p><a class="btn btn-default"--> @*onclick='SaveUser()'*@ <!--id="button">Save</a></p><br /><br />-->
     </div>
 </div>
 
@@ -38,47 +39,64 @@
 </div>
 <style>
     #myTable tr th {
-        color:white;
-        width:300px;
-        height:40px;
-        text-decoration:solid;
-        background-color:yellowgreen;
-        padding:10px;
+        color: white;
+        width: 300px;
+        height: 40px;
+        text-decoration: solid;
+        background-color: yellowgreen;
+        padding: 10px;
     }
-
 </style>
-<script>
-   
-    var model = { FirstName: $("#FirstName").val, LastName: $("#LastName").val, Email: $("#Email").val, Password: $("#Password").val }
-    $.ajax
-        ({
-            type: "POST",
-            url: "Crud/Create",
-            data: JSON.stringify(model),
-            contentType: "application/json",
-            success:
-                function (result)
-                {
-                    $("#myTable").append
-                        (
-                            "<tr><td>"
-                            + result.firstname +
-                            "</td ><td> >"
-                            + result.lastname +
-                            "</td><td>"
-                            + result.email +
-                            "</td><td>"
-                            + result.password +
-                            "</td></tr>"
 
-                            $("#FirstName").val(" ");
-                    $("#LastName").val(" ");
-                    $("#Email").val(" ");
-                    $("#Password").val(" ");
-                }
-
-
-
+<script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js">
+    $(document).ready(funcion()
+        {
+            $("#button").click(function () {
+                alert("you clicked foo");
+            })
         })
 </script>
+@*$(document).ready(function () {
+        alert("document ready");
+    });*@
+@*
+
+    function SaveUser() {
+        var model = { FirstName: $("#FirstName").val, LastName: $("#LastName").val, Email: $("#Email").val, Password: $("#Password").val }
+        alert("button pressed");
+        alert($("#FirstName").val);
+        alert(model.password);
+        $.ajax
+            ({
+                type: "POST",
+                url: @Url.Action("Post","Api"),
+                data: JSON.stringify(model),
+                contentType: "application/json",
+                success:
+                    function (result) {
+                        $("#myTable").append
+                            (
+                                "<tr><td>"
+                                + result.firstname +
+                                "</td ><td> >"
+                                + result.lastname +
+                                "</td><td>"
+                                + result.email +
+                                "</td><td>"
+                                + result.password +
+                                "</td></tr>");
+
+                        $("#FirstName").val(" ");
+                        $("#LastName").val(" ");
+                        $("#Email").val(" ");
+                        $("#Password").val(" ");
+                    }
+
+
+
+          })
+    } *@
+
+
+
 

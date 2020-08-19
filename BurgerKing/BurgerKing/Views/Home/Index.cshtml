@@ -1,0 +1,87 @@
+﻿@model IEnumerable<BurgerKing.Models.Customer>
+
+@{
+    ViewBag.Title = "EditOrder";
+}
+<br/><br/>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="row">
+            <h2 class="panel-title pull-left" style="margin-left:10px;">
+                <strong>Order Details</strong>
+            </h2>
+            <button style="margin-right:10px" class="btn btn-primary pull-right" onclick="addNewOrder()">New Order</button>
+        </div>
+    </div>
+
+    @if (Model.Count() != 0)
+    {
+        foreach (var item in Model)
+        {
+            <div class="card">
+                <div class="card-header">
+                    Invoice
+                    <strong>@item.OrderDate</strong>
+
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-5">
+
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-sm-6">
+                                <h6 class="mb-3">Customer Details:</h6>
+                            </div>
+                                <strong>Customer Name: @item.Name</strong>
+                        </div>
+                        <div>Address:<span style="text-decoration: underline;">@item.Address</span></div>
+                        <div>@Html.ActionLink("Edit", "EditCusomter", new { id = @item.CustomerId}, new { @class = "btn btn-warning pull-right btn-sm glyphicon glyphicon-edit" })</div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <table class="table table-striped table-responsive">
+                    <tbody>
+                        <tr>
+                            <td colspan="3">
+                                <div class="table-responsive-sm">
+                                    <table class="table table-striped css-serial">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Item</th>
+                                                    <th>Quantity</th>
+                                                    <th>Unit Cost</th>
+                                                    <th>Total</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                        @{
+                                            var totalbill = 0;
+                                         }
+                                        @foreach (var order in item.Orders)
+                                        { 
+                                            <tbody>
+                                                <tr>
+                                                    <td></td>
+                                                    <td>@order.ProductName</td>
+                                                    <td>@order.Quantity</td>
+                                                    <td>@order.Price</td>
+                                                    <td>@order.Amount</td>
+                                                    <td>@Html.ActionLink("Edit Order","Edit",new { id=order.OrderId},new { @class="btn btn-warning pull-right btn-sm glyphicon glyphicon-edit"})</td>
+                                                </tr>
+                                            </tbody>
+                                            totalbill = totalbill + @Convert.ToInt32(order.Amount);
+                                        }
+                                        </table>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        }
+    }
+</div>

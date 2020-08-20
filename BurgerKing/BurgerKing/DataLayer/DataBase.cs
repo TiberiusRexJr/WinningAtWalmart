@@ -18,6 +18,7 @@ namespace BurgerKing.DataLayer
         private readonly string _password = "supersix5!";
         private readonly string _database = "ldb";
         private readonly string _procedureName="dbo.WinningAtWalmart_CRUD";
+        private readonly string _SqlServerExpress = @"Server=localhost\SQLEXPRESS;Database=master;Trusted_Connection=True;";
         #endregion
         #region Properties
         public SqlConnection DbConnection { get; set; }

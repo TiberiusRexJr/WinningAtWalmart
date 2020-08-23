@@ -29,3 +29,7 @@ $("#left-arrow").click(function ()
         
     }
 })
+
+$(document).ready(function () {
+    
+})

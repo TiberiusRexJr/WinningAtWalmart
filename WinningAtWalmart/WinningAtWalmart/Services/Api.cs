@@ -16,6 +16,7 @@ namespace WinningAtWalmart
     [ApiController]
     public class Api : ControllerBase
     {
+        DataBase db = new DataBase();
         // GET: api/<CrudApi>
         [HttpGet]
         public IEnumerable<string> Get()
@@ -24,10 +25,14 @@ namespace WinningAtWalmart
         }
 
         // GET api/<CrudApi>/5
+        
         [HttpGet("{id}")]
-        public string Get(int id)
+        public string Get(int queryCode)
         {
-            return "value";
+            db.RetrieveAll
+
+
+            //return Json();
         }
 
         // POST api/<CrudApi>

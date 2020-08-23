@@ -19,19 +19,19 @@ namespace WinningAtWalmart
         DataBase db = new DataBase();
         // GET: api/<CrudApi>
         [HttpGet]
-        public IEnumerable<string> Get()
+       /* public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
-        }
+        }*/
 
         // GET api/<CrudApi>/5
         
-        [HttpGet("{id}")]
-        public string Get(int queryCode)
+        /*[HttpGet("{id}")]*/
+        [HttpGet]
+        public string Get([FromBody] string data)
         {
-            db.RetrieveAll
-
-
+            List<Worker> workers=db.RetrieveAll();
+            return "hello from api"+data;
             //return Json();
         }
 

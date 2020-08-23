@@ -31,5 +31,24 @@ $("#left-arrow").click(function ()
 })
 
 $(document).ready(function () {
-    
+
+    var data = "eli";
+    alert("hi");
+    $.ajax({
+        url: 'https://localhost:44363/Api/Get/data',
+        type: 'POST',
+        dataType: 'json',
+        data: data,
+        success: function (data, textStatus, xhr) {
+            console.log(data);
+            alert(data);
+        },
+        error: function (xhr, textStatus, errorThrown) {
+            console.log(xhr);
+            console.log(textStatus);
+            console.log(errorThrown);
+            console.log('Error in Operation');
+            alert("error" + errorThrown.toString());
+        }
+    });
 })

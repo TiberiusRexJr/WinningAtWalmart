@@ -4,6 +4,7 @@
 @model WinningAtWalmart.Models.Worker
 
 <div class="row">
+    <form method="post" id="formSignUp">
     <div class="col-md-8 col-lg-offset-4">
         <h2>Sign Up!</h2>
         <br />
@@ -11,10 +12,35 @@
         <span>Last Name: </span>@Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })<br />
         <span>Email:</span>@Html.TextBoxFor(m => m.Email, new { @class = "form-control" })<br />
         <span>Password:</span>@Html.TextBoxFor(m => m.Password, new { @class = "form-control" })<br />
-        <
-        <!--<p><a class="btn btn-default"--> @*onclick='SaveUser()'*@ <!--id="button">Save</a></p><br /><br />-->
+
+        <button id="saveOrder" type="submit" class="btn btn-danger">Save Order</button>
+    
     </div>
+        </form>
 </div>
+<link rel="stylesheet" type="text/css" href="~/css/slider.css" />
+<div class="panel-body">
+    
+        <div id="slider">
+            <div class="slide active">
+                #1
+            </div>
+            <div class="slide">
+                #2
+            </div>
+            <div class="slide">
+                #3
+            </div>
+        </div>
+        <div>
+            <p id="left-arrow"><</p>
+            <p id="right-arrow">></p>
+        </div>
+        
+
+   
+</div>
+
 
 <div class="row">
     <table @*class="table table-bordered table-responsive table-hover" *@ id="myTable" class="table-striped">
@@ -48,55 +74,45 @@
     }
 </style>
 
-<script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js">
-    $(document).ready(funcion()
+
+@section Scripts
+{
+
+    <script>
+        $("#saveOrder").click(function (e)
         {
-            $("#button").click(function () {
-                alert("you clicked foo");
-            })
-        })
-</script>
-@*$(document).ready(function () {
-        alert("document ready");
-    });*@
-@*
-
-    function SaveUser() {
-        var model = { FirstName: $("#FirstName").val, LastName: $("#LastName").val, Email: $("#Email").val, Password: $("#Password").val }
-        alert("button pressed");
-        alert($("#FirstName").val);
-        alert(model.password);
-        $.ajax
-            ({
-                type: "POST",
-                url: @Url.Action("Post","Api"),
-                data: JSON.stringify(model),
-                contentType: "application/json",
-                success:
-                    function (result) {
-                        $("#myTable").append
-                            (
-                                "<tr><td>"
-                                + result.firstname +
-                                "</td ><td> >"
-                                + result.lastname +
-                                "</td><td>"
-                                + result.email +
-                                "</td><td>"
-                                + result.password +
-                                "</td></tr>");
-
-                        $("#FirstName").val(" ");
-                        $("#LastName").val(" ");
-                        $("#Email").val(" ");
-                        $("#Password").val(" ");
+            e.preventDefault();
+            var firstname = $("#FirstName").val();
+            alert($("#LastName").val());
+            var data=
+            {
+                firstname: $("#FirstName").val(),
+                    lastname: $("#LastName").val(),
+                        email: $("#Email").val(),
+                            password: $("#Password").val()
+            }
+            $.ajax(
+                {
+                    
+                    dataType: 'json',
+                    type: 'POST',
+                    url: "/Home/AddUser",
+                    data: data,
+                    success: function (result) {
+                        alert(result);
+                        location.relod();
+                    },
+                    error: function () {
+                        alert("Error!")
                     }
+                });
 
+        })
+    </script>
+    <script src="~/js/slider.js">
 
-
-          })
-    } *@
-
+    </script>
+}
 
 
 

@@ -7,6 +7,17 @@ namespace WinningAtWalmart.Models
 {
     public class Worker
     {
+        public Worker()
+        {
+        }
+
+        public Worker(string firstName, string lastName, string email, string password)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            Email = email;
+            Password = password;
+        }
         #region Variables
         #endregion
         #region Properties

@@ -1,0 +1,6 @@
+namespace JqueryPractice.Areas.HelpPage.ModelDescriptions
+{
+    public class DictionaryModelDescription : KeyValuePairModelDescription
+    {
+    }
+}

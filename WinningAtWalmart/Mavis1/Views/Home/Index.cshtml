@@ -1,24 +1,24 @@
 ﻿@{
-    ViewBag.Title = "Winning At Walmart V1";
+    ViewBag.Title = "Mavis_1";
 }
-@model WinningAtWalmart.Models.Worker
+@model Mavis1.Models.Worker
 
-<div class="row">
-    <form method="post" id="formSignUp">
-    <div class="col-md-8 col-lg-offset-4">
-        <h2>Sign Up!</h2>
-        <br />
-        <span>First Name:</span>@Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })<br />
-        <span>Last Name: </span>@Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })<br />
-        <span>Email:</span>@Html.TextBoxFor(m => m.Email, new { @class = "form-control" })<br />
-        <span>Password:</span>@Html.TextBoxFor(m => m.Password, new { @class = "form-control" })<br />
+    <div class="row">
+          <form method="post" id="formSignUp">
+                <div class="col-md-8 col-lg-offset-4">
+                    <h2>Sign Up!</h2>
+                    <br />
+                    <span>First Name:</span>@Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })<br />
+                    <span>Last Name: </span>@Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })<br />
+                    <span>Email:</span>@Html.TextBoxFor(m => m.Email, new { @class = "form-control" })<br />
+                    <span>Password:</span>@Html.TextBoxFor(m => m.Password, new { @class = "form-control" })<br />
 
-        <button id="saveOrder" type="submit" class="btn btn-danger">Save Order</button>
-    
-    </div>
-        </form>
-</div>
-<link rel="stylesheet" type="text/css" href="~/css/slider.css" />
+                    <button id="saveOrder" type="submit" class="btn btn-danger">Save Order</button>
+
+                </div>
+            </form>
+        </div>
+<link rel="stylesheet" type="text/css" href="~/Content/slider.css" />
 <div class="panel-body">
     
         <div id="slider">
@@ -110,7 +110,7 @@
         })
     </script>
 
-    <script src="~/js/slider.js">
+    <script src="~/Scripts/slider.js">
 
     </script>
 }

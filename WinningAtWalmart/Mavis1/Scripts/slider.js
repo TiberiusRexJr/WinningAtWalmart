@@ -1,47 +1,48 @@
-﻿$('#right-arrow').click(function () {
-    var currentSlide = $(".slide.active");
-    var nextSlide = currentSlide.next();
-    currentSlide.fadeOut(300).removeClass('active');
-   
-
-    if (nextSlide.length == 0) {
-        $('.slide').first().fadeIn(300).addClass("active");
-    }
-    else {
-        nextSlide.fadeIn(300).addClass('active');
-    }
-});
-
-$("#left-arrow").click(function ()
-{
-   
-    var currentSlide = $('.slide.active');
-    var previousSlide = currentSlide.prev();
-
-    currentSlide.fadeOut(300).removeClass('active');
-    previousSlide.fadeIn(300).addClass('active');
-    
-
-    if (previousSlide.length == 0) {
-        $(".slide").last().fadeIn(300).addClass('active');
-    }
-    else {
-        
-    }
-})
-
+﻿
 $(document).ready(function () {
 
-    var data = "eli";
+ 
+    OwlShit();
+    GetData();
+    
+    
+})
+//functions
+function OwlShit()
+{
+    alert("owl shit");
+    var owl = $(".owl-carousel");
+    owl.owlCarousel({
+        items: 4,
+        loop: true,
+        margin: 10,
+        autoplay: true,
+        autoplayTimeout: 1000,
+        autoplayHoverPause: true
+    });
+    $('.play').on('click', function () {
+        owl.trigger('play.owl.autoplay', [1000])
+    });
+    $('.stop').on('click', function () {
+        owl.trigger('stop.owl.autoplay')
+    });
+}
+function GetData() {
     alert("hi");
     $.ajax({
-        url: 'api/Get',
+        url: 'api/Values',
         type: 'GET',
         dataType: 'json',
-   
+
         success: function (data, textStatus, xhr) {
-            console.log(data);
+
+            
             alert(data);
+            
+            $.each(data, function (index, value) {
+                var data = $.parseJSON(value);
+                $("<div class='item'>" + "<p>" + data.FirstName + "</p>" + "</div>").appendTo(".owl-carousel");
+            })
         },
         error: function (xhr, textStatus, errorThrown) {
             console.log(xhr);
@@ -51,4 +52,6 @@ $(document).ready(function () {
             alert("error" + errorThrown.toString());
         }
     });
-})
+}
+
+   

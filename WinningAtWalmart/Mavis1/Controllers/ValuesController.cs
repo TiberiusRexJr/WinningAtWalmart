@@ -4,15 +4,25 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Mavis1.Models;
+using Mavis1.DataLayer;
+using Newtonsoft.Json;
 
 namespace Mavis1.Controllers
 {
     public class ValuesController : ApiController
     {
+        DataBase db = new DataBase();
         // GET api/values
-        public IEnumerable<string> Get()
+        public List<string> Get()
         {
-            return new string[] { "value1", "value2" };
+            List<string> workers = new List<string>();
+            List<Worker> _ = db.RetrieveAll();
+            foreach (Worker w in _)
+            {
+                workers.Add(JsonConvert.SerializeObject(w));
+            }
+            return workers;
         }
 
         // GET api/values/5

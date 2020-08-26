@@ -33,3 +33,9 @@
     height:65%;
     background-color:#00ff21;
 }
+.slider_item 
+{
+    font-size:50px;
+    border-color:orange !important;
+    border-width:40px;
+}

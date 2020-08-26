@@ -1,8 +1,10 @@
 ﻿
 $(document).ready(function () {
 
- 
-    OwlShit();
+ //for each worker object create adn insert a div into .owl-carousl
+    //call owlshit to initate the carouslel.
+
+   //OwlShit();  //                         
     GetData();
     
     
@@ -28,30 +30,57 @@ function OwlShit()
     });
 }
 function GetData() {
+    var workercount = 0;
     alert("hi");
     $.ajax({
         url: 'api/Values',
         type: 'GET',
-        dataType: 'json',
+        
 
         success: function (data, textStatus, xhr) {
 
             
-            alert(data);
+            alert(data+"1");
             
             $.each(data, function (index, value) {
+                workercount = index;
                 var data = $.parseJSON(value);
-                $("<div class='item'>" + "<p>" + data.FirstName + "</p>" + "</div>").appendTo(".owl-carousel");
+                $(".owl-carousel").append("<div class='item'>" + "<p>" + data.FirstName + "</p>" + "<p>" + data.LastName + "</p>" + "<p>" + data.Email + "</p>" + "<p>" + data.Password + "</p>" + "</div>");
             })
+            alert("owl shit 2");
+            var owl = $(".owl-carousel");
+            owl.owlCarousel({
+                items: workercount,
+                loop: true,
+                margin: 10,
+                autoplay: true,
+                autoplayTimeout: 1000,
+                autoplayHoverPause: true,
+                callbacks: true,
+                onInitialized: message
+
+
+            });
+            $('.play').on('click', function () {
+                owl.trigger('play.owl.autoplay', [1000])
+            });
+            $('.stop').on('click', function () {
+                owl.trigger('stop.owl.autoplay')
+            });
         },
         error: function (xhr, textStatus, errorThrown) {
             console.log(xhr);
             console.log(textStatus);
             console.log(errorThrown);
             console.log('Error in Operation');
+            alert(textStatus.toString());
+            alert(xhr);
             alert("error" + errorThrown.toString());
         }
     });
+}
+function message() {
+    alert("hi from initialized 3");
 }
 
    

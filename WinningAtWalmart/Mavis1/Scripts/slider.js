@@ -6,8 +6,14 @@ $(document).ready(function () {
 
    //OwlShit();  //                         
     GetData();
-    
-    
+
+    $(".owl-carousel").on('click', '.item', function ()
+    {
+        alert("hi");
+        var id = $(this).find('input').val();
+        alert(id.toString());
+
+    });
 })
 //functions
 function OwlShit()
@@ -45,7 +51,8 @@ function GetData() {
             $.each(data, function (index, value) {
                 workercount = index;
                 var data = $.parseJSON(value);
-                $(".owl-carousel").append("<div class='item'>" + "<p>" + data.FirstName + "</p>" + "<p>" + data.LastName + "</p>" + "<p>" + data.Email + "</p>" + "<p>" + data.Password + "</p>" + "</div>");
+                $(".owl-carousel").append("<div class='item'>" + "<p>" + data.FirstName + "</p>" + "<p>" + data.LastName + "</p>" + "<p>" + data.Email + "</p>" + "<p>" + data.Password + "</p>" +
+                    "<input id='worker_id' name='worker_id' type='hidden' value='"+data.Id+"'>"+"</div>");
             })
             alert("owl shit 2");
             var owl = $(".owl-carousel");
@@ -82,6 +89,10 @@ function message() {
         owl.trigger('stop.owl.autoplay')
     });
     alert("hi from initialized 3");
+}
+function slider_div_onClick()
+{
+    alert("hi");
 }
 
    

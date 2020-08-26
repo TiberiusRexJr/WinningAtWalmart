@@ -61,12 +61,7 @@ function GetData() {
 
 
             });
-            $('.play').on('click', function () {
-                owl.trigger('play.owl.autoplay', [1000])
-            });
-            $('.stop').on('click', function () {
-                owl.trigger('stop.owl.autoplay')
-            });
+       
         },
         error: function (xhr, textStatus, errorThrown) {
             console.log(xhr);
@@ -80,6 +75,12 @@ function GetData() {
     });
 }
 function message() {
+    $('.play').on('click', function () {
+        owl.trigger('play.owl.autoplay', [1000])
+    });
+    $('.stop').on('click', function () {
+        owl.trigger('stop.owl.autoplay')
+    });
     alert("hi from initialized 3");
 }
 
